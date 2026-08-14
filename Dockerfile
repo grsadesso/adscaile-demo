@@ -1,10 +1,12 @@
 FROM nginx:alpine
 
-# Kopiere die statischen Dateien in das Nginx-Verzeichnis
+# Kopieren der statischen Dateien nach /usr/share/nginx/html
 COPY index.html /usr/share/nginx/html/index.html
 COPY style.css /usr/share/nginx/html/style.css
 
-# Konfiguriere Nginx, um auf Port 99123 zu lauschen
-RUN sed -i 's/listen       80;/listen       99123;/' /etc/nginx/conf.d/default.conf
+# Konfiguration des Ports auf 9123
+EXPOSE 9123
 
-EXPOSE 99123
+# Anpassung der Nginx-Konfiguration, um auf Port 9123 zu lauschen
+RUN sed -i 's/listen  80;/listen 9123;/' /etc/nginx/conf.d/default.conf
+
